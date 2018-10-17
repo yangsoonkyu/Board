@@ -111,7 +111,7 @@ public class DataManager {
 	//// 회원가입 여부 확인
 	public boolean isMember(String id, String pass) {
 		PreparedStatement pstmt = null;
-		String query = "SELECT *FROM member id =? and pass=?";
+		String query = "SELECT *FROM member WHERE id =? and pass=?";
 		boolean res = false;
 		openConnection();
 		try {

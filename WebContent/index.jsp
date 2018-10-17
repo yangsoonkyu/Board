@@ -7,7 +7,7 @@
 <title>메인페이지</title>
 </head>
 <body>
-<form action="user/loing.jsp" method="post">
+<form action="user/login.jsp" method="post">
 <table>
 <tr>
 <td>아이디</td>
