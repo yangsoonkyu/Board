@@ -18,7 +18,8 @@
         String rPath = request.getContextPath();
         if (data.isMember(id, pass)) {
             session.setAttribute("ID", id);
-            response.sendRedirect(rPath+"/user/member_info.jsp");
+           // response.sendRedirect(rPath+"/user/member_info.jsp");
+           response.sendRedirect(rPath+"/board/post_list.jsp");
         } else {
             response.sendRedirect(rPath+"/index.jsp");
         }

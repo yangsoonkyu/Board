@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class DataManager {
 
@@ -128,8 +130,8 @@ public class DataManager {
 		}
 		return res;
 	}
-	
-	////기존 회원정보 확인
+
+	//// 기존 회원정보 확인
 	public MemberInfo getMember(String id) {
 		PreparedStatement pstmt = null;
 		MemberInfo member = new MemberInfo();
@@ -140,7 +142,7 @@ public class DataManager {
 			pstmt.setString(1, id);
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
-			
+
 			member.setId(rs.getString("id"));
 			member.setPass(rs.getString("pass"));
 			member.setName(rs.getString("name"));
@@ -148,9 +150,66 @@ public class DataManager {
 			member.setEmail(rs.getString("email"));
 			member.setReg_date(rs.getTimestamp("reg_date"));
 			rs.close();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {closeConnection();}
+		} finally {
+			closeConnection();
+		}
 		return member;
 	}
+
+	//// 게시글 목록 불러오기
+	public PostInfo getPost(int num) {
+		PreparedStatement pstmt = null;
+		PostInfo post = new PostInfo();
+		
+		String query = "SELECT * FROM board WHERE post_num=?";
+		openConnection();
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+			ResultSet rs= pstmt.executeQuery();
+			rs.next();
+			post.setPost_num(rs.getInt("post_num"));
+			post.setTitle(rs.getString("title"));
+			post.setId(rs.getString("id"));
+			post.setCreated_date(rs.getTimestamp("created_date"));
+			rs.close();
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeConnection();
+		}
+		
+		return post;
+	}
+	
+	
+	//게시글 전체의 갯수 구하기 
+	public int getPostlen() {
+		int num = 0;
+		PreparedStatement pstmt = null;
+		PostInfo post = new PostInfo();
+		
+		String query = "SELECT * FROM board";
+		openConnection();
+		try {
+			pstmt = con.prepareStatement(query);
+			ResultSet rs= pstmt.executeQuery();
+			rs.last();
+			num = rs.getRow();
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeConnection();
+		}
+		
+		return num;
+		
+		
+	}
+
 }
