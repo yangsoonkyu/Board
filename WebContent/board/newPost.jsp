@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page session="true"%>
@@ -9,27 +10,45 @@
 </head>
 <body>
 	<h2>새글작성하기</h2>
-	<form action="<%=request.getContextPath()%>/board/post.jsp" method="post">
+	<a href="<%=request.getContextPath()%>/board/post_list.jsp">목록으로</a>
+	
+<%
+String id = (String) session.getAttribute("ID");
+String rPath = request.getContextPath();
 
-		<table>
-			<tr>
-				<td>작성자:</td>
-				<td><%=session.getAttribute("ID") %></td>
-			</tr>
-			<tr>
-				<td>제목:</td>
-				<td><input type="text" name="title" /></td>
-			</tr>
-			<tr><td>내용:</td><td><textarea name="text" rows="" cols=""></textarea></td></tr>
+
+if(id != null){
+	out.print("<form action=\""+ rPath +"/board/post.jsp\"	method=\"post\" name=\"postForm\">");
+	out.print("<table>");
+	out.print("<tr><td>제목:</td><td><input type=\"text\" name=\"title\" /></td></tr>");
+	out.print("<tr><td>내용:</td><td><textarea id =\"text\" name=\"text\" rows=\"\" cols=\"\"></textarea></td></tr>");
+	out.print("<tr><td><input type=\"submit\" value=\"작성\"  />	<td><input type=\"reset\" value=\"취소\" /></td></tr>");
+	out.print("</table>");
+	out.print("</form>");
+	
+	
+}else{
+	out.print("<b>로그인한 사용자만 작성할수 있습니다.</b>");
+	out.print("<a href=\""+ rPath + "/index.jsp\">로그인</a><br/>");
+}
+	
+
+
+
+%>
+		
 			
-			<tr><td>작성일:</td><td><input type="date" name="created_date" /></td></tr>
-			<tr><td><input type="submit" value="작성" /><td><input type="reset" value="취소" /></td></tr>
+				
+			
+			
 
-		</table>
+			
+			
+
+		
 
 
-	</form>
-
+	
 
 
 </body>

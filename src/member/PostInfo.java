@@ -6,7 +6,7 @@ public class PostInfo {
 	private Integer post_num;
 	private String id;
 	private String title;
-	private StringBuffer text;
+	private String text;
 	private Timestamp created_date;
 	private Timestamp published_date;
 	public Integer getPost_num() {
@@ -27,10 +27,10 @@ public class PostInfo {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public StringBuffer getText() {
+	public String getText() {
 		return text;
 	}
-	public void setText(StringBuffer text) {
+	public void setText(String text) {
 		this.text = text;
 	}
 	public Timestamp getCreated_date() {

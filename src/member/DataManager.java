@@ -162,54 +162,74 @@ public class DataManager {
 	public PostInfo getPost(int num) {
 		PreparedStatement pstmt = null;
 		PostInfo post = new PostInfo();
-		
+
 		String query = "SELECT * FROM board WHERE post_num=?";
 		openConnection();
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, num);
-			ResultSet rs= pstmt.executeQuery();
+			ResultSet rs = pstmt.executeQuery();
 			rs.next();
 			post.setPost_num(rs.getInt("post_num"));
 			post.setTitle(rs.getString("title"));
 			post.setId(rs.getString("id"));
 			post.setCreated_date(rs.getTimestamp("created_date"));
 			rs.close();
-			
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			closeConnection();
 		}
-		
+
 		return post;
 	}
-	
-	
-	//게시글 전체의 갯수 구하기 
+
+	// 게시글 전체의 갯수 구하기
 	public int getPostlen() {
 		int num = 0;
 		PreparedStatement pstmt = null;
-		PostInfo post = new PostInfo();
-		
+		//PostInfo post = new PostInfo();
+
 		String query = "SELECT * FROM board";
 		openConnection();
 		try {
 			pstmt = con.prepareStatement(query);
-			ResultSet rs= pstmt.executeQuery();
+			ResultSet rs = pstmt.executeQuery();
 			rs.last();
 			num = rs.getRow();
-		
-		}catch(Exception e) {
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection();
+		}
+
+		return num;
+
+	}
+
+	public int insertPost(PostInfo post) {
+		PreparedStatement pstmt = null;
+		//String query = "INSERT INTO board VALUES(\"id\",\"제목\",\"내용\",null,null,null) ";
+		String query = "INSERT INTO board VALUES(?,?,?,now(),null,null) ";
+		int res = 0;
+		openConnection();
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, post.getId());
+			pstmt.setString(2, post.getTitle());
+			pstmt.setString(3, post.getText());
+			
+			res = pstmt.executeUpdate();
+		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			closeConnection();
 		}
-		
-		return num;
-		
-		
+		return res;
 	}
-
+	
+	
+	
 }
