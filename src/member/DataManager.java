@@ -173,6 +173,7 @@ public class DataManager {
 			post.setPost_num(rs.getInt("post_num"));
 			post.setTitle(rs.getString("title"));
 			post.setId(rs.getString("id"));
+			post.setText(rs.getString("text"));
 			post.setCreated_date(rs.getTimestamp("created_date"));
 			rs.close();
 
@@ -209,6 +210,7 @@ public class DataManager {
 
 	}
 
+	////새글쓰기 
 	public int insertPost(PostInfo post) {
 		PreparedStatement pstmt = null;
 		//String query = "INSERT INTO board VALUES(\"id\",\"제목\",\"내용\",null,null,null) ";
@@ -230,6 +232,48 @@ public class DataManager {
 		return res;
 	}
 	
+	
+	////수정하기
+	public int updatePost(PostInfo post) {
+		PreparedStatement pstmt = null;
+		
+		String query = "UPDATE board SET title=?, text=? WHERE post_num=?";
+		int res = 0;
+		openConnection();
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, post.getTitle());
+			pstmt.setString(2, post.getText());
+			pstmt.setInt(3, post.getPost_num());
+			res = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection();
+		}
+		return res;
+	}
+	
+	
+	////글 삭제하기
+	public int removePost(int num) {
+		PreparedStatement pstmt = null;
+		String query = "DELETE FROM board WHERE post_num=?";
+		int res = 0;
+		openConnection();
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+
+			res = pstmt.executeUpdate();
+		} catch (Exception e) {
+
+		} finally {
+			closeConnection();
+
+		}
+		return res;
+	}
 	
 	
 }

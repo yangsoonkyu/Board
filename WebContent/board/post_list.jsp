@@ -5,6 +5,11 @@
 <%
 	request.setCharacterEncoding("utf-8");
 %>
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +17,12 @@
 <title>게시판</title>
 </head>
 <body>
+	<%
+		PostInfo post = new PostInfo();
+	%>
 	<jsp:useBean id="data" class="member.DataManager" scope="page" />
+
+
 
 	<%
 		String id = (String) session.getAttribute("ID");
@@ -25,18 +35,16 @@
 			out.print("<a href=\"" + rPath + "/board/newPost.jsp\">글쓰기</a>");
 			out.print("<table>");
 			out.print("<tr><td>글번호</td><td>제목</td><td>아이디</td><td>날짜</td></tr>");
-
 			for (int i = 1; i <= len; i++) {
-				PostInfo post = data.getPost(i);
+				post = data.getPost(i);
 
 				if (post.getPost_num() != null) {
 					out.print("<tr>");
 					out.print("<td>" + post.getPost_num() + "</td>");
-					request.setAttribute("post_num", i);
-					
-					
-					out.print("<td><a href=\"" + rPath + "/board/postDetail.jsp\"> " + post.getTitle()
-							+ "</a></td>");
+					//request.setAttribute("post_num", i);
+
+					out.print(
+							"<td><a href=\"" + rPath + "/board/postDetail.jsp?num=" + i + "\"> " + post.getTitle() + "</a></td>");
 					out.print("<td>" + post.getId() + "</td>");
 					out.print("<td>" + post.getCreated_date() + "</td>");
 					out.print("</tr>");
