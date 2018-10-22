@@ -27,7 +27,7 @@
 	<%
 		String id = (String) session.getAttribute("ID");
 		String rPath = request.getContextPath();
-		int len = data.getPostlen();
+		//int len = data.getPostlen();
 		if (id != null) {
 			out.print("<b>로그인한 사용자입니다. </b>");
 			out.print("<a href=\"" + rPath + "/user/logout.jsp\">로그아웃</a><br/>");
@@ -35,7 +35,7 @@
 			out.print("<a href=\"" + rPath + "/board/newPost.jsp\">글쓰기</a>");
 			out.print("<table>");
 			out.print("<tr><td>글번호</td><td>제목</td><td>아이디</td><td>날짜</td></tr>");
-			for (int i = 1; i <= len; i++) {
+			for (int i = 1; i <= 30; i++) { //30개까지 글이 보입니다 .
 				post = data.getPost(i);
 
 				if (post.getPost_num() != null) {
