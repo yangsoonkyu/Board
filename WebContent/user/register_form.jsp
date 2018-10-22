@@ -49,79 +49,63 @@
 		var id = $("#ID"), pass = $("#PASS"), pass2 = $("#PASS2"), nameForm = $("#NAME"), phone = $("#PHONE"), email = $("#EMAIL");
 
 		$(document).ready(function() {
-			$(":button").click(function() {
-				//formCheck();
-				//passCheck();
-				//emailCheck();
-				phoneCheck();
-			})
+			$(":button").click(formCheck)
 		})
 
-		//공백체크
 		function formCheck() {
-			//alert("gg2");
+			////공백체크
 			if (id.val() == "") {
 				return alert("아이디를 입력해주세요");
-
 			}
 			;
 			if (pass.val() == "") {
 				return alert("비밀번호를 입력해주세요");
-			};
+			}
+			;
 			if (pass2.val() == "") {
 				return alert("비밀번호 확인을 입력해주세요");
-			};
+			}
+			;
 			if (nameForm.val() == "") {
 				return alert("이름을 입력해 주세요 ");
-			};
-			//if (phone.val() == "") {
-			//	return alert("전화번호를 입력해주세요");
-			//};
+			}
+			;
+
 			if (email.val() == "") {
 				return alert("이메일을 입력해주세요");
 			}
 
-
-		}
-		
-		//비밀번호 체크 
-		function passCheck() {
+			////비밀번호 체크
 			if (pass.val().length < 8) {
 				return alert("비밀번호를 8자리 이상 입력해주세요")
-			}else if(pass2.val().length < 8){
+			} else if (pass2.val().length < 8) {
 				return alert("비밀번호 확인을 8자리 이상 입력해주세요")
 			}
-			
-			if(pass.val() != pass2.val()){
+
+			if (pass.val() != pass2.val()) {
 				return alert("비밀번호가 일치하지 않습니다.")
 			}
 
-		}
-		
-		
-		//이메일체크
-		function emailCheck(){
-			if(email.val().indexOf("@") == -1){
+			if (email.val().indexOf("@") == -1) {
 				return alert("이메일 형식이 잘못되었습니다.")
 			}
-		}
-		
-		//전화번호체크 
-		function phoneCheck(){
-			var number = Number($("#PHONE").val());
-			if(phone.val() == ""){
+			////전화번호체크
+			var phoneNum = Number($("#PHONE").val());
+			if (phone.val() == "") {
 				return alert("전화번호를 입력해주세요 ")
 			}
-			if(phone.val().indexOf("-") > -1){
+
+			if (phone.val().indexOf("-") > -1) {
 				return alert("전화번호에 '-'를 입력할수 없습니다.");
-				
-			}if($.type(number).toString() != number ){
-				return alert("전화번호는 숫자만 입력해주세요 ")
-				
+
 			}
+			if (isNaN(phoneNum)) {
+				return alert("전화번호는 숫자만 입력해주세요 ")
+
+			}
+
+			$("form").submit();
 		}
-		
-		
 	</script>
 </body>
 </html>
