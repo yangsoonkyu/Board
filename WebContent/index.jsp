@@ -27,10 +27,5 @@
 		<a href="<%=request.getContextPath()%>/board/post_list.jsp">게시판</a>
 	</form>
 
-	<table>
-		<tr><td>글번호</td><td>제목</td><td>아이디</td><td>날짜</td></tr>
-		<<tr></tr>>
-
-	</table>
 </body>
 </html>

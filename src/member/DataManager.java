@@ -12,7 +12,7 @@ public class DataManager {
 
 	// 서버접속정보를 저장한다.
 	Connection con = null;
-	String url = "jdbc:mysql://localhost:3306/my_site";
+	String url = "jdbc:mysql://localhost:3306/my_site?";
 	String user = "jsp_user";
 	String pass = "qwer1234";
 

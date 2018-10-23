@@ -8,7 +8,7 @@
 </head>
 <body>
 	<form action="<%=request.getContextPath()%>/user/register.jsp"
-		method="post">
+		method="post" accept-charset="utf-8">
 		<table>
 
 			<tr>
@@ -43,8 +43,10 @@
 
 
 	</form>
+	
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
 	<script>
 		var id = $("#ID"), pass = $("#PASS"), pass2 = $("#PASS2"), nameForm = $("#NAME"), phone = $("#PHONE"), email = $("#EMAIL");
 
